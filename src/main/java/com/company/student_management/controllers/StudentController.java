@@ -1,11 +1,13 @@
 package com.company.student_management.controllers;
 
 import com.company.student_management.dbhelper.DBConnection;
+import com.company.student_management.login.Login;
 import com.company.student_management.objects.Student;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentController {
@@ -26,8 +28,8 @@ public class StudentController {
                     + "VALUES('" + name + "'," + age + ")");
             ps.execute();
             return true;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -44,7 +46,7 @@ public class StudentController {
             int studentId, age;
             String name;
             Student student = new Student();
-            while(rs.next()){
+            while (rs.next()) {
                 studentId = rs.getInt("id");
                 name = rs.getString("name");
                 age = rs.getInt("age");
@@ -54,17 +56,30 @@ public class StudentController {
             }
 
             return student;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
     }
-    public static Student signUp() {
-        System.out.print("Enter your username: ");
-        String username = scanner.next();
-        System.out.print("Enter your password: ");
-        String password = scanner.next();
-//TODO
-        return null;
+
+    public static void addStudentScore() {
+        System.out.print("Enter the student's id: ");
+        int id = scanner.nextInt();
+        System.out.print("Enter Math score: ");
+        int mathScore = scanner.nextInt();
+        System.out.print("Enter English score: ");
+        int englishScore = scanner.nextInt();
+
+
+        try {
+            ps = DBConnection.getConnection().prepareStatement("INSERT INTO scores(Mathematics, English, student_id) " +
+                    "VALUES(" + mathScore + ", " + englishScore + ", " + id + ")");
+            ps.execute();
+            System.out.println("Successfully added score.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
+
 }
