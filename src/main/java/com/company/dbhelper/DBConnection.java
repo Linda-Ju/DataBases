@@ -1,4 +1,4 @@
-package com.company.student_management.dbhelper;
+package com.company.dbhelper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

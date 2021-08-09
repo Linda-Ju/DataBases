@@ -1,6 +1,6 @@
 package com.company.student_management.login;
 
-import com.company.student_management.dbhelper.DBConnection;
+import com.company.dbhelper.DBConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,13 +1,11 @@
 package com.company.student_management.controllers;
 
-import com.company.student_management.dbhelper.DBConnection;
-import com.company.student_management.login.Login;
+import com.company.dbhelper.DBConnection;
 import com.company.student_management.objects.Student;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
 
 public class StudentController {
@@ -34,7 +32,7 @@ public class StudentController {
         }
     }
 
-    public static Student getStudentId() {
+    public static Student getStudentById() {
         // Prompt the user to enter id of the student they want to retrieve
         System.out.print("Enter the id of the student: ");
         int id = scanner.nextInt();
@@ -53,8 +51,8 @@ public class StudentController {
                 student.setId(studentId);
                 student.setName(name);
                 student.setAge(age);
+                System.out.println(studentId + "\t " + name + "\t " + age + "\t ");
             }
-
             return student;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,8 +60,40 @@ public class StudentController {
         }
     }
 
+    public static void editStudent() {
+        System.out.print("Enter student's id: ");
+        int id = scanner.nextInt();
+        System.out.print("name, age");
+        System.out.print("Enter the field you want to edit: ");
+        String field = scanner.next();
+        System.out.print("Enter the updated value: ");
+        String updatedValue = scanner.next();
+
+        try {
+            ps = DBConnection.getConnection().prepareStatement("UPDATE students SET " + field +
+                    " = " + updatedValue + " WHERE id = " + id);
+            ps.execute();
+            System.out.println("Successfully updated student.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteStudent() {
+        System.out.print("Enter student's id: ");
+        int id = scanner.nextInt();
+
+        try {
+            ps = DBConnection.getConnection().prepareStatement("DELETE FROM students WHERE id= " + id);
+            ps.execute();
+            System.out.println("Successfully deleted student.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void addStudentScore() {
-        System.out.print("Enter the student's id: ");
+        System.out.print("Enter student's id: ");
         int id = scanner.nextInt();
         System.out.print("Enter Math score: ");
         int mathScore = scanner.nextInt();
@@ -82,4 +112,41 @@ public class StudentController {
 
     }
 
+    public static void removeStudentScore() {
+        System.out.print("Enter student's id: ");
+        int id = scanner.nextInt();
+        System.out.print("Math, English");
+        System.out.print("Enter the subject: ");
+        String subject = scanner.next();
+
+        try {
+            ps = DBConnection.getConnection().prepareStatement("UPDATE scores SET " + subject +
+                    " = 0 WHERE id = " + id);
+            ps.execute();
+            System.out.println("Successfully removed score.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void editStudentScore() {
+        System.out.print("Enter student's id: ");
+        int id = scanner.nextInt();
+        System.out.print("Math, English");
+        System.out.print("Enter the subject: ");
+        String subject = scanner.next();
+        System.out.print("Enter the updated score: ");
+        int updatedScore = scanner.nextInt();
+
+        try {
+            ps = DBConnection.getConnection().prepareStatement("UPDATE scores SET " + subject +
+                    " = " + updatedScore + " WHERE id = " + id);
+            ps.execute();
+            System.out.println("Successfully updated score.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
