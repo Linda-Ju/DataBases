@@ -4,8 +4,12 @@ public class Patient {
     private int id;
     private String name;
     private int age;
+    private int doctorID;
+    private int drugID;
+    private String diagnosis;
 
-    public Patient (){}
+    public Patient() {
+    }
 
     public Patient(int id, String name, int age) {
         this.id = id;
@@ -35,5 +39,29 @@ public class Patient {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getDoctorID() {
+        return doctorID;
+    }
+
+    public void setDoctorID(int doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    public int getDrugID() {
+        return drugID;
+    }
+
+    public void setDrugID(int drugID) {
+        this.drugID = drugID;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
     }
 }

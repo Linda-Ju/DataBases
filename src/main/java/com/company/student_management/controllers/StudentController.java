@@ -147,6 +147,5 @@ public class StudentController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

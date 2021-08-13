@@ -8,7 +8,7 @@ public class DBConnection {
    public static Connection getConnection(){
        Connection connection = null;
        try {
-           connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/testrun", "root", "Wsxcftfcxsw!2233");
+           connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital", "root", "Wsxcftfcxsw!2233");
        } catch (SQLException e) {
            e.printStackTrace();
        }
